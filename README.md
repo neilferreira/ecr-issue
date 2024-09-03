@@ -6,17 +6,15 @@ I would like to be able to use local (or registry) based build cache storage bac
 
 To reproduce the issue within AWS ECR:
 
-Enable the `containerd image store` as per https://docs.docker.com/build/cache/backends/ by adding the following to the Docker features:
+Enable the `containerd image store` as per https://docs.docker.com/build/cache/backends/ by following one of the following options.
 
-```
-"features": {
-    "containerd-snapshotter": true
-}
-```
+1. Using containerd for pulling and storing images on Docker destkop: https://docs.docker.com/desktop/containerd/#enable-the-containerd-image-store
 
-ref: https://docs.docker.com/engine/storage/containerd/#enable-containerd-image-store-on-docker-engine
+2. Enable containerd image store on Docker Engine: https://docs.docker.com/engine/storage/containerd/#enable-containerd-image-store-on-docker-engine
 
-Create an ECR repository:
+Once containerd is eanbled and in use:
+
+Create an IMMUTABLE ECR repository:
 
 ```
 aws ecr create-repository --image-tag-mutability IMMUTABLE --repository-name tester
